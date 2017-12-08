@@ -1,0 +1,35 @@
+plugins {
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+repositories {
+    maven {
+        credentials {
+            username "$mavenUser"
+            password "$mavenPass"
+        }
+        url 'http://maven.coder4.com/nexus/content/groups/public'
+    }
+}
+
+// import bom
+dependencyManagement {
+    imports {
+        mavenBom 'com.coder4.sbmvt:pom-parent:0.0.1'
+    }
+}
+
+dependencies {
+    // use bom version
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'App'
+
